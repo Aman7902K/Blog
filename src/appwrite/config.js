@@ -109,20 +109,19 @@ export class Service{
         }
     }
 
-    async uploadFile(fileId){
-        try{
+    async deleteFile(fileId){
+        try {
             await this.bucket.deleteFile(
-                conf.appwriteBid,
-                ID.unique(),
+                conf.appwriteBucketId,
                 fileId
             )
             return true
-        }
-        catch(err){     
-            console.log(err,"error occured");
-            return false  
+        } catch (error) {
+            console.log("Appwrite serive :: deleteFile :: error", error);
+            return false
         }
     }
+
 
     getFilePreview(fileId){
         return this.bucket.getFilePreview(
@@ -130,4 +129,11 @@ export class Service{
             fileId
         )
     }
+    test(){
+        return "hello"
+    }
 }
+
+const service = new Service()
+
+export default service
